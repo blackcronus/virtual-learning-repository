@@ -8,9 +8,9 @@ mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: 
     console.log('MongoDB connected...');
     
     // If your Mongoose models are in separate files, you'd require them like this:
-    const User = require('./models/User');
-    const Course = require('./models/Course');
-    const Interaction = require('./models/Interaction');
+    const User = require('./models/user');
+    const Course = require('./models/course');
+    const Interaction = require('./models/interaction');
 
     // Example of using a model to interact with the database:
     // Creating a new user
