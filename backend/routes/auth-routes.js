@@ -1,24 +1,29 @@
-// auth-routes.js
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
-const User = require('../models/User'); // Adjust the path to your User model
-const passport = require('passport');
+const User = require('../models/User'); // Make sure the path is correct
 
-// Register route
 router.post('/register', async (req, res) => {
-  // ...
-});
+    const { username, email, password } = req.body;
 
-// Login route
-router.post('/login', passport.authenticate('local'), (req, res) => {
-  // ...
-});
+    try {
+        // Check if user already exists
+        let user = await User.findOne({ email });
+        if (user) {
+            return res.status(400).json({ msg: 'User already exists' });
+        }
 
-// You may also want to add logout functionality
-router.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/login');
+        user = new User({
+            username,
+            email,
+            password
+        });
+
+        await user.save();
+        res.status(201).json({ msg: 'User registered successfully' });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
 });
 
 module.exports = router;

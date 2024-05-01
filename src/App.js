@@ -1,18 +1,31 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Register from './components/auth/Register'; // Adjusted to the correct path
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Home from './components/Home';
+import Courses from './components/Courses';
+import Register from './components/Register';
 
 function App() {
   return (
     <Router>
-      <div className="App">
-        <header className="App-header">
-          <h1>Hello World</h1>
-        </header>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/courses">Courses</Link>
+            </li>
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
+          </ul>
+        </nav>
+
         <Routes>
-          {/* Route for the Registration page */}
+          <Route path="/" element={<Home />} />
+          <Route path="/courses" element={<Courses />} />
           <Route path="/register" element={<Register />} />
-          {/* You can add more routes here */}
         </Routes>
       </div>
     </Router>
