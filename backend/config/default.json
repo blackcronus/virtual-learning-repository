@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://nicolauhenriques3:Godzilla99@vlrdevelopment.fysxgro.mongodb.net/VLRdb?retryWrites=true&w=majority",
+  "jwtSecret": "3f8d2e7334a8e5d18bfa2191d50b4476f1a2e91a54f3b6a8e6a0b71a8c62a6d1"
+}

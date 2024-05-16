@@ -1,77 +1,45 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuthDispatch, registerUser } from '../context/AuthContext';
+import './Register.css';
 
 const Register = () => {
-    // State to hold form data
-    const [formData, setFormData] = useState({
-        username: '',
-        email: '',
-        password: ''
-    });
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const dispatch = useAuthDispatch();
+    const navigate = useNavigate();
 
-    // Handle input changes
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
+    const handleRegister = async (e) => {
+        e.preventDefault();
+        try {
+            await registerUser(dispatch, { email, password });
+            navigate('/courses');
+        } catch (err) {
+            setError('Failed to register');
+        }
     };
 
-    // Handle form submission
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // Send formData to backend
-        fetch('http://localhost:5000/api/auth/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData)
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-            // Handle success, e.g., redirect or display a success message
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-            // Handle errors, e.g., display error message
-        });
-    };
-
-    // Registration form
     return (
-        <form onSubmit={handleSubmit}>
-            <h1>Register Page</h1>
-            <label>
-                Username:
-                <input
-                    type="text"
-                    name="username"
-                    value={formData.username}
-                    onChange={handleChange}
+        <div className="auth-container">
+            <form onSubmit={handleRegister}>
+                <h1>Register</h1>
+                <input 
+                    type="email" 
+                    placeholder="Email" 
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)} 
                 />
-            </label>
-            <label>
-                Email:
-                <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
+                <input 
+                    type="password" 
+                    placeholder="Password" 
+                    value={password} 
+                    onChange={(e) => setPassword(e.target.value)} 
                 />
-            </label>
-            <label>
-                Password:
-                <input
-                    type="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                />
-            </label>
-            <button type="submit">Register</button>
-        </form>
+                <button type="submit">Register</button>
+                {error && <p className="error-message">{error}</p>}
+            </form>
+        </div>
     );
 };
 

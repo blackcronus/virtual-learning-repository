@@ -1,0 +1,17 @@
+nav {
+  background: #333;
+  color: #fff;
+  display: flex;
+  justify-content: center; /* Center items horizontally */
+  padding: 10px;
+}
+
+nav a {
+  color: #fff;
+  margin: 0 15px;
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}

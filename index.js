@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 require('dotenv').config();
 const mongoose = require('mongoose');
 

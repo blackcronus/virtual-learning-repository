@@ -1,35 +1,29 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import Navbar from './components/routing/Navbar';
 import Home from './components/Home';
-import Courses from './components/Courses';
+import Catalog from './components/Catalog';
 import Register from './components/Register';
+import Login from './components/Login';
+import Programming from './components/resources/Programming';
+import Painting from './components/resources/Painting';
+import Cooking from './components/resources/Cooking';
 
 function App() {
-  return (
-    <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/courses">Courses</Link>
-            </li>
-            <li>
-              <Link to="/register">Register</Link>
-            </li>
-          </ul>
-        </nav>
-
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/courses" element={<Courses />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
-      </div>
-    </Router>
-  );
+    return (
+        <>
+            <Navbar />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/courses" element={<Catalog />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/programming" element={<Programming />} />
+                <Route path="/painting" element={<Painting />} />
+                <Route path="/cooking" element={<Cooking />} />
+            </Routes>
+        </>
+    );
 }
 
 export default App;

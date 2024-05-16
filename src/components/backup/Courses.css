@@ -1,0 +1,20 @@
+/* Courses.css */
+.courses-container {
+  width: 100%;
+  min-height: 100vh;
+  background-image: url('./assets/VLRbackground.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.courses-container .content {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 8px;
+}

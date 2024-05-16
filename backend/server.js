@@ -1,15 +1,22 @@
 const express = require('express');
-const app = express();
+const mongoose = require('mongoose');
 const cors = require('cors');
-const coursesRoutes = require('./routes/courses');
-const authRoutes = require('./routes/auth-routes');
+const config = require('config');
+const app = express();
 
-app.use(cors());
-app.use(express.json()); // Middleware to parse JSON
+// Middleware
+app.use(express.json());
+app.use(cors()); // Enable CORS
 
-// Use routes
-app.use('/api/courses', coursesRoutes);
-app.use('/api/auth', authRoutes);
+// MongoDB connection
+const db = config.get('mongoURI');
+
+mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('MongoDB connected...'))
+    .catch(err => console.log(err));
+
+// Define Routes
+app.use('/api/auth', require('./routes/api/auth'));
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`)); 
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
