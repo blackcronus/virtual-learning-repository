@@ -8,10 +8,11 @@ import Login from './components/Login';
 import Programming from './components/resources/Programming';
 import Painting from './components/resources/Painting';
 import Cooking from './components/resources/Cooking';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
     return (
-        <>
+        <AuthProvider>
             <Navbar />
             <Routes>
                 <Route path="/" element={<Home />} />
@@ -22,7 +23,7 @@ function App() {
                 <Route path="/painting" element={<Painting />} />
                 <Route path="/cooking" element={<Cooking />} />
             </Routes>
-        </>
+        </AuthProvider>
     );
 }
 

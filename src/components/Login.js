@@ -16,7 +16,7 @@ const Login = () => {
             await loginUser(dispatch, { email, password });
             navigate('/courses');
         } catch (err) {
-            setError('Failed to log in');
+            setError('Failed to login');
         }
     };
 
